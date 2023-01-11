@@ -1,0 +1,32 @@
+.landing {
+  .maxw {
+    max-width: 1000px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .features {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: stretch;
+    padding: 20px 0;
+
+    article {
+      &:nth-child(odd) {
+        background-color: $gray2;
+      }
+      padding: 10px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-content: flex-start;
+      header {
+        display: flex;
+        align-items: flex-end;
+        font-weight: bold;
+        font-size: 18px;
+        padding-top: 10px;
+      }
+    }
+  }
+}

@@ -1,0 +1,4 @@
+baseURL = 'https://strimertul.github.io/'
+languageCode = 'en-us'
+title = 'strimertül | Free & open source broadcasting suite'
+theme = 'strimertul'

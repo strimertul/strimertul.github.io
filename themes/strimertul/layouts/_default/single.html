@@ -1,0 +1,7 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+<section class="meta">
+  Published on {{.Date | time.Format "2006-01-02" }} {{ if (gt .Lastmod .Date)
+  }}| Last modified on {{.Lastmod | time.Format "2006-01-02" }} {{ end }}
+</section>
+{{ .Content }} {{ end }}

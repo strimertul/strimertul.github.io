@@ -1,0 +1,71 @@
+body {
+  background-color: $site-bg;
+  font-family: $inter;
+  color: $copy-color;
+  margin: 0;
+  padding: 0;
+}
+
+a,
+a:visited {
+  color: $teal11;
+}
+
+p {
+  line-height: 1.5;
+  margin: 5px 0;
+}
+
+.site-nav {
+  background-color: $gray2;
+  border-bottom: 2px solid $teal7;
+  display: flex;
+  align-items: stretch;
+  padding: 0 1em;
+
+  .appname {
+    display: flex;
+    gap: 5px;
+    font-size: 20px;
+    align-items: center;
+    font-family: $inter;
+    font-weight: 300;
+  }
+
+  nav {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    align-items: stretch;
+    & > a {
+      color: $teal12;
+      display: flex;
+      align-items: center;
+      padding: 5px 14px;
+      text-decoration: none;
+      transition: all 60ms;
+      &:hover {
+        background: $gray3;
+        box-shadow: inset 0 -2px $teal9;
+      }
+    }
+  }
+
+  @media only screen and (max-width: $mobile) {
+    flex-direction: column;
+    padding: 10px 0;
+    nav {
+      flex-direction: column;
+    }
+  }
+}
+
+.appname {
+  padding: 10px;
+}
+
+.container {
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+}

@@ -1,0 +1,9 @@
+name = "strimertul website"
+license = "AGPL-3.0-or-later"
+licenselink = "https://github.com/strimertul/strimertul.github.io/blob/master/LICENSE"
+description = ""
+homepage = "https://strimertul.github.io/"
+tags = []
+features = []
+staticDir = ['static']
+min_version = "0.41.0"
