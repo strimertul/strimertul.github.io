@@ -7,5 +7,10 @@
   {{ $style := resources.Get "scss/main.scss" | resources.ToCSS (dict
   "targetPath" "css/main.css" "enableSourceMap" true ) | minify |
   resources.Fingerprint }}
+  <style>
+    body {
+      background-color: hsl(0, 0%, 8.5%);
+    }
+  </style>
   <link rel="stylesheet" href="{{ $style.RelPermalink }}" />
 </head>
