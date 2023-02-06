@@ -19,7 +19,20 @@
             <header>One API for everything</header>
             <p>
               Build overlays and tooling with easy access to Twitch alerts, chat
-              messages and more through a single websocket interface.
+              messages and more through a single websocket interface. The API
+              strives for simplicity with a
+              <a
+                href="https://github.com/strimertul/kilovolt/blob/main/PROTOCOL.md"
+                >documented protocol</a
+              >, but we also maintain bindings for popular languages such as
+              <a href="https://github.com/strimertul/kilovolt-client-ts"
+                >Typescript</a
+              >,
+              <a href="https://github.com/strimertul/kilovolt-client-go">Go</a>
+              and
+              <a href="https://github.com/strimertul/kilovolt-client-python"
+                >Python</a
+              >.
             </p>
           </div>
           {{ $image := resources.Get "landing/websocket.svg" }}
@@ -50,10 +63,10 @@
       <div class="maxw">
         <div class="flex">
           <div class="flex-copy">
-            <header>Keep total control</header>
+            <header>Keep total control of your tech</header>
             <p>
-              strimertül runs completely in your computer and has no remote
-              components.
+              Unlike popular alternatives, strimertül runs completely in your
+              computer and has no remote components.
             </p>
           </div>
           {{ $image := resources.Get "landing/downloads.png" }}
@@ -67,9 +80,9 @@
           {{ $image := resources.Get "landing/AGPLv3_Logo.svg" }}
           <img class="landing-point" src="{{ $image.RelPermalink }}" />
           <div>
-            <header>Won't turn evil</header>
+            <header>Free and won't turn evil</header>
             <p>
-              strimertül is licensed under
+              strimertül is free and open source under the
               <a
                 href="https://github.com/strimertul/strimertul/blob/master/LICENSE"
                 >AGPLv3</a
