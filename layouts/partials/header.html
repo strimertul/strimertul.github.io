@@ -4,9 +4,23 @@
     strimertül
   </div>
   <nav>
-    <a href='{{ relURL "" }}'>Overview</a>
-    <!-- <a href='{{ relURL "guide" }}'>Guide</a> -->
-    <!-- <a href='{{ relURL "api" }}'>API reference</a> -->
+    <a
+      href="{{ relURL "" }}"
+      {{ if .IsHome }}class="current"{{ end }}
+      >Overview</a
+    >
+    {{ $currentPage := . }}
+    {{ $section := .Site.GetPage $currentPage.Section }}
+    {{ range .Site.Menus.main }}
+      <a
+        class="navbar-item {{ if $section.IsMenuCurrent "main" . }}
+          current
+        {{ end }}"
+        href="{{ .URL | absLangURL | safeURL }}"
+      >
+        {{ .Name }}
+      </a>
+    {{ end }}
     <a href="https://github.com/strimertul/strimertul">GitHub</a>
   </nav>
 </header>

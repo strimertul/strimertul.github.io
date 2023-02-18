@@ -1,4 +1,5 @@
 {{ define "main" }}
+<main class="single maxw">
 <h1>{{ .Title }}</h1>
 {{ range .Pages.ByPublishDate.Reverse }}
 <p>
@@ -8,4 +9,5 @@
     </a>
 </p>
 {{ end }}
+</main>
 {{ end }}

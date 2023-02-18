@@ -1,101 +1,103 @@
 {{ define "main" }}
-<main class="landing">
-  <section class="hero maxw">
-    <div class="hero-copy">
-      <h1>HEY PUT TEXT HERE!</h1>
-      <div class="download-button">
-        <a href="https://github.com/strimertul/strimertul/releases/latest">
-          Download
-        </a>
-      </div>
-    </div>
-    <div class="screenshots"></div>
-  </section>
-  <section class="features">
-    <article>
-      <div class="maxw">
-        <div class="flex">
-          <div>
-            <header>One API for everything</header>
-            <p>
-              Build overlays and tooling with easy access to Twitch alerts, chat
-              messages and more through a single websocket interface. The API
-              strives for simplicity with a
-              <a
-                href="https://github.com/strimertul/kilovolt/blob/main/PROTOCOL.md"
-                >documented protocol</a
-              >, but there are also officially supported bindings for popular
-              languages such as
-              <a href="https://github.com/strimertul/kilovolt-client-ts"
-                >Typescript</a
-              >,
-              <a href="https://github.com/strimertul/kilovolt-client-go">Go</a>
-              and
-              <a href="https://github.com/strimertul/kilovolt-client-python"
-                >Python</a
-              >.
-            </p>
-          </div>
-          {{ $image := resources.Get "landing/websocket.svg" }}
-          <img
-            class="landing-point"
-            src="{{ $image.RelPermalink }}"
-            style="width: 200px; padding-left: 20px"
-          />
+  <main class="landing">
+    <section class="hero maxw">
+      <div class="hero-copy">
+        <h1>HEY PUT TEXT HERE!</h1>
+        <div class="download-button">
+          <a href="https://github.com/strimertul/strimertul/releases/latest">
+            Download
+          </a>
         </div>
       </div>
-    </article>
-    <article>
-      <div class="maxw">
-        <div class="flex">
-          {{ $image := resources.Get "landing/rewards.png" }}
-          <img class="landing-point" src="{{ $image.RelPermalink }}" />
-          <div>
-            <header>No Twitch Affiliate?</header>
-            <p>
-              The built-in loyalty system lets regular viewers accrue points,
-              claim rewards and contribute towards community goals.
-            </p>
+      <div class="screenshots"></div>
+    </section>
+    <section class="features">
+      <article>
+        <div class="maxw">
+          <div class="flex">
+            <div>
+              <header>One API for everything</header>
+              <p>
+                Build overlays and tooling with easy access to Twitch alerts,
+                chat messages and more through a single websocket interface. The
+                API strives for simplicity with a
+                <a
+                  href="https://github.com/strimertul/kilovolt/blob/main/PROTOCOL.md"
+                  >documented protocol</a
+                >, but there are also officially supported bindings for popular
+                languages such as
+                <a href="https://github.com/strimertul/kilovolt-client-ts"
+                  >Typescript</a
+                >,
+                <a href="https://github.com/strimertul/kilovolt-client-go"
+                  >Go</a
+                >
+                and
+                <a href="https://github.com/strimertul/kilovolt-client-python"
+                  >Python</a
+                >.
+              </p>
+            </div>
+            {{ $image := resources.Get "landing/websocket.svg" }}
+            <img
+              class="landing-point"
+              src="{{ $image.RelPermalink }}"
+              style="width: 200px; padding-left: 20px"
+            />
           </div>
         </div>
-      </div>
-    </article>
-    <article>
-      <div class="maxw">
-        <div class="flex">
-          <div class="flex-copy">
-            <header>Keep total control of your tech</header>
-            <p>
-              Strimertül runs completely in your computer and has no remote
-              components.
-            </p>
-          </div>
-          {{ $image := resources.Get "landing/downloads.png" }}
-          <img class="landing-point" src="{{ $image.RelPermalink }}" />
-        </div>
-      </div>
-    </article>
-    <article>
-      <div class="maxw">
-        <div class="flex">
-          {{ $image := resources.Get "landing/AGPLv3_Logo.svg" }}
-          <img class="landing-point" src="{{ $image.RelPermalink }}" />
-          <div>
-            <header>Free and won't turn evil</header>
-            <p>
-              strimertül is free and open source under the
-              <a
-                href="https://github.com/strimertul/strimertul/blob/master/LICENSE"
-                >AGPLv3</a
-              >, a strong
-              <a href="https://en.wikipedia.org/wiki/Copyleft"
-                >copyleft license</a
-              >, meaning we couldn't close it down even if we wanted!
-            </p>
+      </article>
+      <article>
+        <div class="maxw">
+          <div class="flex">
+            {{ $image := resources.Get "landing/rewards.png" }}
+            <img class="landing-point" src="{{ $image.RelPermalink }}" />
+            <div>
+              <header>No Twitch Affiliate?</header>
+              <p>
+                The built-in loyalty system lets regular viewers accrue points,
+                claim rewards and contribute towards community goals.
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-    </article>
-  </section>
-</main>
+      </article>
+      <article>
+        <div class="maxw">
+          <div class="flex">
+            <div class="flex-copy">
+              <header>Keep total control of your tech</header>
+              <p>
+                Strimertül runs completely in your computer and has no remote
+                components.
+              </p>
+            </div>
+            {{ $image := resources.Get "landing/downloads.png" }}
+            <img class="landing-point" src="{{ $image.RelPermalink }}" />
+          </div>
+        </div>
+      </article>
+      <article>
+        <div class="maxw">
+          <div class="flex">
+            {{ $image := resources.Get "landing/AGPLv3_Logo.svg" }}
+            <img class="landing-point" src="{{ $image.RelPermalink }}" />
+            <div>
+              <header>Free and won't turn evil</header>
+              <p>
+                strimertül is free and open source under the
+                <a
+                  href="https://github.com/strimertul/strimertul/blob/master/LICENSE"
+                  >AGPLv3</a
+                >, a strong
+                <a href="https://en.wikipedia.org/wiki/Copyleft"
+                  >copyleft license</a
+                >, meaning we couldn't close it down even if we wanted!
+              </p>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
 {{ end }}

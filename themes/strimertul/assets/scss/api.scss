@@ -1,0 +1,104 @@
+.apidocs {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 250px 1fr;
+  @media only screen and (max-width: $mobile) {
+    grid-template-columns: 1fr;
+    & > nav {
+      display: none;
+    }
+  }
+  & > nav,
+  & > .doc {
+    grid-row: 1;
+    padding: 1rem;
+  }
+  & > nav {
+    padding: 0;
+    grid-column: 1;
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      li {
+        display: flex;
+        align-items: stretch;
+        justify-content: stretch;
+        transition: all 100ms;
+        &:nth-child(odd) {
+          background-color: rgba(255, 255, 255, 0.02);
+        }
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.05);
+        }
+        a {
+          flex: 1;
+          padding: 0.5rem;
+          color: $teal10;
+        }
+        a:hover {
+          color: $teal12;
+        }
+      }
+    }
+  }
+  & > .doc {
+    grid-column: 2;
+  }
+  .monotitle {
+    font-family: "Iosevka Web", monospace;
+  }
+  .reference {
+    .api {
+      padding-bottom: 15px;
+      .tag {
+        background-color: #5699e1;
+        color: rgb(239, 245, 249);
+        font-size: 12px;
+        text-transform: uppercase;
+        display: inline-block;
+        padding: 3px 5px;
+        border-radius: 8px;
+        &.rpc {
+          background-color: #8e56e1;
+        }
+        &.event {
+          background-color: #018937;
+        }
+        &.history {
+          background-color: #037f88;
+        }
+      }
+    }
+  }
+}
+
+.schema {
+  margin-top: 1rem;
+  .nameblock {
+    display: none;
+  }
+  li {
+    list-style-type: none;
+    & > code > .nameblock {
+      display: inline-flex;
+      & > .name {
+        &::before,
+        &::after {
+          content: '"';
+        }
+      }
+    }
+  }
+  ul {
+    padding: 0;
+    margin: 0;
+    margin-left: 2rem;
+  }
+  .name {
+    color: $yellow11;
+  }
+  .kind {
+    color: $grass10;
+  }
+}

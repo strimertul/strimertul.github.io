@@ -6,6 +6,12 @@ body {
   padding: 0;
 }
 
+.maxw {
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+}
+
 a,
 a:visited {
   color: $teal11;
@@ -44,9 +50,15 @@ p {
       padding: 5px 14px;
       text-decoration: none;
       transition: all 60ms;
-      &:hover {
-        background: $gray3;
-        box-shadow: inset 0 -2px $teal9;
+      &.current {
+        background: $gray1;
+        pointer-events: none;
+      }
+      &:not(.current) {
+        &:hover {
+          background: $gray3;
+          box-shadow: inset 0 -2px $teal9;
+        }
       }
     }
   }

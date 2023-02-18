@@ -1,0 +1,75 @@
+{{ define "schema" }}
+  <code>
+    {{ with .element }}
+      {{ with $.name }}
+        <div class="nameblock"><span class="name">{{ . }}</span>:</div>
+      {{ end }}
+      arrayOf [
+      {{ template  "schema" . }}
+      ]
+    {{ else }}
+      {{ if (eq .name .kind) }}
+        <span class="kind">{{ .kind }}</span>
+      {{ else }}
+        {{ with .name }}
+          <div class="nameblock">
+            <span class="name">{{ . }}</span>{{ if $.isPointer }}
+              <abbr class="pointer" title="Optional, might not be in the object"
+                >*</abbr
+              >
+            {{ end }}:
+          </div>
+        {{ end }}
+        <span class="kind">{{ .kind }}</span>
+      {{ end }}
+      {{ with .keys }}
+        {
+        {{ range . }}
+          <ul>
+            <li>{{ template  "schema" . }}</li>
+          </ul>
+        {{ end }}
+        }
+      {{ end }}
+    {{ end }}
+  </code>
+{{ end }}
+
+{{ define "main" }}
+  {{ $keys := .Site.Data.api.v310.api }}
+  <main class="apidocs">
+    <nav>
+      <ul>
+        {{ range $key, $spec := $keys }}
+          <li>
+            <a href="#{{ anchorize $key }}" class="monotitle">{{ $key }}</a>
+          </li>
+        {{ end }}
+      </ul>
+    </nav>
+    <div class="doc">
+      <section class="copy">{{ .Content }}</section>
+      <section class="reference">
+        {{ range $key, $spec := $keys }}
+          <article class="api" id="{{ anchorize $key }}">
+            <header>
+              <h3>
+                <span class="monotitle">{{ $key }}</span> {{ range .tags }}
+                  <span class="tag {{ . }}">{{ . }}</span>
+                {{ end }}
+              </h3>
+              {{ with .description }}
+                <div class="description">{{ . }}</div>
+              {{ end }}
+              {{ with .schema }}
+                <div class="schema">
+                  {{ template  "schema" . }}
+                </div>
+              {{ end }}
+            </header>
+          </article>
+        {{ end }}
+      </section>
+    </div>
+  </main>
+{{ end }}

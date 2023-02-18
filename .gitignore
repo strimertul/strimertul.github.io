@@ -4,6 +4,9 @@
 /assets/jsconfig.json
 hugo_stats.json
 
+# I HATE YOU PRETTIER I HATE YOU SO MUCH
+node_modules
+
 # Executable may be added to repository
 hugo.exe
 hugo.darwin
