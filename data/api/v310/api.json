@@ -1,59 +1,47 @@
 {
-  "twitch/bot-custom-commands": {
-    "description": "Chatbot custom commands",
+  "loyalty/rewards": {
+    "description": "List of available rewards",
     "schema": {
       "name": "",
-      "kind": "dictionary",
-      "key": {
-        "name": "string",
-        "kind": "string"
-      },
+      "kind": "array",
       "element": {
-        "name": "BotCustomCommand",
+        "name": "Reward",
         "kind": "object",
         "keys": [
           {
-            "name": "description",
-            "description": "Command description",
-            "kind": "string"
-          },
-          {
-            "name": "access_level",
-            "description": "Minimum access level needed to use the command",
-            "kind": "enum",
-            "enumValues": [
-              "everyone",
-              "subscriber",
-              "vip",
-              "moderators",
-              "streamer"
-            ]
-          },
-          {
-            "name": "response",
-            "description": "Response template (in Go templating format)",
-            "kind": "string"
-          },
-          {
             "name": "enabled",
-            "description": "Is the command enabled?",
             "kind": "boolean"
+          },
+          {
+            "name": "id",
+            "kind": "string"
+          },
+          {
+            "name": "name",
+            "kind": "string"
+          },
+          {
+            "name": "description",
+            "kind": "string"
+          },
+          {
+            "name": "image",
+            "kind": "string"
+          },
+          {
+            "name": "price",
+            "kind": "int"
+          },
+          {
+            "name": "required_info",
+            "kind": "string"
+          },
+          {
+            "name": "cooldown",
+            "kind": "int"
           }
         ]
       }
-    }
-  },
-  "loyalty/points/<user>": {
-    "description": "Point entry for a given user",
-    "schema": {
-      "name": "PointsEntry",
-      "kind": "object",
-      "keys": [
-        {
-          "name": "points",
-          "kind": "unknown"
-        }
-      ]
     }
   },
   "loyalty/@remove-redeem": {
@@ -96,7 +84,7 @@
             },
             {
               "name": "price",
-              "kind": "unknown"
+              "kind": "int"
             },
             {
               "name": "required_info",
@@ -104,7 +92,7 @@
             },
             {
               "name": "cooldown",
-              "kind": "unknown"
+              "kind": "int"
             }
           ]
         },
@@ -122,120 +110,161 @@
       "rpc"
     ]
   },
-  "loyalty/config": {
-    "description": "General configuration for the loyalty subsystem",
-    "schema": {
-      "name": "Config",
-      "kind": "object",
-      "keys": [
-        {
-          "name": "enabled",
-          "kind": "boolean"
-        },
-        {
-          "name": "currency",
-          "kind": "string"
-        },
-        {
-          "name": "points",
-          "kind": "object",
-          "keys": [
-            {
-              "name": "interval",
-              "kind": "unknown"
-            },
-            {
-              "name": "amount",
-              "kind": "unknown"
-            },
-            {
-              "name": "activity_bonus",
-              "kind": "unknown"
-            }
-          ]
-        },
-        {
-          "name": "banlist",
-          "kind": "array",
-          "element": {
-            "name": "string",
-            "kind": "string"
-          }
-        }
-      ]
-    }
-  },
-  "twitch/stream-info": {
-    "description": "List of active twitch streams (1 element if live, 0 otherwise)",
+  "twitch/eventsub-history": {
+    "description": "Last eventsub notifications received",
     "schema": {
       "name": "",
       "kind": "array",
       "element": {
-        "name": "Stream",
+        "name": "NotificationMessagePayload",
         "kind": "object",
         "keys": [
           {
-            "name": "id",
-            "kind": "string"
+            "name": "subscription",
+            "kind": "object",
+            "keys": [
+              {
+                "name": "id",
+                "kind": "string"
+              },
+              {
+                "name": "type",
+                "kind": "string"
+              },
+              {
+                "name": "version",
+                "kind": "string"
+              },
+              {
+                "name": "status",
+                "kind": "string"
+              },
+              {
+                "name": "condition",
+                "kind": "object",
+                "keys": [
+                  {
+                    "name": "broadcaster_user_id",
+                    "kind": "string"
+                  },
+                  {
+                    "name": "from_broadcaster_user_id",
+                    "kind": "string"
+                  },
+                  {
+                    "name": "to_broadcaster_user_id",
+                    "kind": "string"
+                  },
+                  {
+                    "name": "reward_id",
+                    "kind": "string"
+                  },
+                  {
+                    "name": "client_id",
+                    "kind": "string"
+                  },
+                  {
+                    "name": "extension_client_id",
+                    "kind": "string"
+                  },
+                  {
+                    "name": "user_id",
+                    "kind": "string"
+                  }
+                ]
+              },
+              {
+                "name": "transport",
+                "kind": "object",
+                "keys": [
+                  {
+                    "name": "method",
+                    "kind": "string"
+                  },
+                  {
+                    "name": "callback",
+                    "kind": "string"
+                  },
+                  {
+                    "name": "secret",
+                    "kind": "string"
+                  },
+                  {
+                    "name": "session_id",
+                    "kind": "string"
+                  },
+                  {
+                    "name": "connected_at",
+                    "kind": "string"
+                  },
+                  {
+                    "name": "disconnected_at",
+                    "kind": "string"
+                  }
+                ]
+              },
+              {
+                "name": "created_at",
+                "kind": "object",
+                "keys": [
+                  {
+                    "name": "Time",
+                    "kind": "datetime"
+                  }
+                ]
+              },
+              {
+                "name": "cost",
+                "kind": "int"
+              }
+            ]
           },
           {
-            "name": "user_id",
-            "kind": "string"
-          },
-          {
-            "name": "user_login",
-            "kind": "string"
-          },
-          {
-            "name": "user_name",
-            "kind": "string"
-          },
-          {
-            "name": "game_id",
-            "kind": "string"
-          },
-          {
-            "name": "game_name",
-            "kind": "string"
-          },
-          {
-            "name": "tag_ids",
+            "name": "event",
             "kind": "array",
             "element": {
-              "name": "string",
-              "kind": "string"
+              "name": "uint8",
+              "kind": "int"
             }
           },
           {
-            "name": "is_mature",
-            "kind": "boolean"
-          },
-          {
-            "name": "type",
-            "kind": "string"
-          },
-          {
-            "name": "title",
-            "kind": "string"
-          },
-          {
-            "name": "viewer_count",
-            "kind": "int"
-          },
-          {
-            "name": "started_at",
+            "name": "date",
             "kind": "datetime"
-          },
-          {
-            "name": "language",
-            "kind": "string"
-          },
-          {
-            "name": "thumbnail_url",
-            "kind": "string"
           }
         ]
       }
+    },
+    "tags": [
+      "history"
+    ]
+  },
+  "twitch/bot-config": {
+    "description": "General configuration for the Twitch chatbot",
+    "schema": {
+      "name": "BotConfig",
+      "kind": "object",
+      "keys": [
+        {
+          "name": "username",
+          "description": "Chatbot username (for internal use, ignored by Twitch)",
+          "kind": "string"
+        },
+        {
+          "name": "oauth",
+          "description": "OAuth key for IRC authentication",
+          "kind": "string"
+        },
+        {
+          "name": "channel",
+          "description": "Twitch channel to join and use",
+          "kind": "string"
+        },
+        {
+          "name": "chat_history",
+          "description": "How many messages to keep in twitch/chat-history",
+          "kind": "int"
+        }
+      ]
     }
   },
   "twitch/chat-history": {
@@ -416,130 +445,6 @@
       "history"
     ]
   },
-  "twitch/ev/eventsub-event": {
-    "description": "On Eventsub event received",
-    "schema": {
-      "name": "NotificationMessagePayload",
-      "kind": "object",
-      "keys": [
-        {
-          "name": "subscription",
-          "kind": "object",
-          "keys": [
-            {
-              "name": "id",
-              "kind": "string"
-            },
-            {
-              "name": "type",
-              "kind": "string"
-            },
-            {
-              "name": "version",
-              "kind": "string"
-            },
-            {
-              "name": "status",
-              "kind": "string"
-            },
-            {
-              "name": "condition",
-              "kind": "object",
-              "keys": [
-                {
-                  "name": "broadcaster_user_id",
-                  "kind": "string"
-                },
-                {
-                  "name": "from_broadcaster_user_id",
-                  "kind": "string"
-                },
-                {
-                  "name": "to_broadcaster_user_id",
-                  "kind": "string"
-                },
-                {
-                  "name": "reward_id",
-                  "kind": "string"
-                },
-                {
-                  "name": "client_id",
-                  "kind": "string"
-                },
-                {
-                  "name": "extension_client_id",
-                  "kind": "string"
-                },
-                {
-                  "name": "user_id",
-                  "kind": "string"
-                }
-              ]
-            },
-            {
-              "name": "transport",
-              "kind": "object",
-              "keys": [
-                {
-                  "name": "method",
-                  "kind": "string"
-                },
-                {
-                  "name": "callback",
-                  "kind": "string"
-                },
-                {
-                  "name": "secret",
-                  "kind": "string"
-                },
-                {
-                  "name": "session_id",
-                  "kind": "string"
-                },
-                {
-                  "name": "connected_at",
-                  "kind": "string"
-                },
-                {
-                  "name": "disconnected_at",
-                  "kind": "string"
-                }
-              ]
-            },
-            {
-              "name": "created_at",
-              "kind": "object",
-              "keys": [
-                {
-                  "name": "Time",
-                  "kind": "datetime"
-                }
-              ]
-            },
-            {
-              "name": "cost",
-              "kind": "int"
-            }
-          ]
-        },
-        {
-          "name": "event",
-          "kind": "array",
-          "element": {
-            "name": "uint8",
-            "kind": "int"
-          }
-        },
-        {
-          "name": "date",
-          "kind": "datetime"
-        }
-      ]
-    },
-    "tags": [
-      "event"
-    ]
-  },
   "twitch/@send-chat-message": {
     "description": "Send plain text chat message",
     "schema": {
@@ -550,172 +455,227 @@
       "rpc"
     ]
   },
-  "twitch/ev/chat-message": {
-    "description": "On chat message received",
+  "loyalty/config": {
+    "description": "General configuration for the loyalty subsystem",
     "schema": {
-      "name": "PrivateMessage",
+      "name": "Config",
       "kind": "object",
       "keys": [
         {
-          "name": "User",
+          "name": "enabled",
+          "kind": "boolean"
+        },
+        {
+          "name": "currency",
+          "kind": "string"
+        },
+        {
+          "name": "points",
           "kind": "object",
           "keys": [
             {
-              "name": "ID",
-              "kind": "string"
+              "name": "interval",
+              "kind": "int"
             },
             {
-              "name": "Name",
-              "kind": "string"
+              "name": "amount",
+              "kind": "int"
             },
             {
-              "name": "DisplayName",
-              "kind": "string"
-            },
-            {
-              "name": "Color",
-              "kind": "string"
-            },
-            {
-              "name": "Badges",
-              "kind": "dictionary",
-              "key": {
-                "name": "string",
-                "kind": "string"
-              },
-              "element": {
-                "name": "int",
-                "kind": "int"
-              }
+              "name": "activity_bonus",
+              "kind": "int"
             }
           ]
         },
         {
-          "name": "Raw",
-          "kind": "string"
-        },
-        {
-          "name": "Type",
-          "kind": "int"
-        },
-        {
-          "name": "RawType",
-          "kind": "string"
-        },
-        {
-          "name": "Tags",
-          "kind": "dictionary",
-          "key": {
-            "name": "string",
-            "kind": "string"
-          },
+          "name": "banlist",
+          "kind": "array",
           "element": {
             "name": "string",
             "kind": "string"
           }
-        },
-        {
-          "name": "Message",
-          "kind": "string"
-        },
-        {
-          "name": "Channel",
-          "kind": "string"
-        },
-        {
-          "name": "RoomID",
-          "kind": "string"
-        },
-        {
-          "name": "ID",
-          "kind": "string"
-        },
-        {
-          "name": "Time",
-          "kind": "datetime"
-        },
-        {
-          "name": "Emotes",
-          "kind": "array",
-          "element": {
-            "name": "",
+        }
+      ]
+    }
+  },
+  "loyalty/goals": {
+    "description": "List of all goals",
+    "schema": {
+      "name": "",
+      "kind": "array",
+      "element": {
+        "name": "Goal",
+        "kind": "object",
+        "keys": [
+          {
+            "name": "enabled",
+            "kind": "boolean"
+          },
+          {
+            "name": "id",
+            "kind": "string"
+          },
+          {
+            "name": "name",
+            "kind": "string"
+          },
+          {
+            "name": "description",
+            "kind": "string"
+          },
+          {
+            "name": "image",
+            "kind": "string"
+          },
+          {
+            "name": "total",
+            "kind": "int"
+          },
+          {
+            "name": "contributed",
+            "kind": "int"
+          },
+          {
+            "name": "contributors",
+            "kind": "dictionary",
+            "key": {
+              "name": "string",
+              "kind": "string"
+            },
+            "element": {
+              "name": "int64",
+              "kind": "int"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "loyalty/redeem-queue": {
+    "description": "All pending redeems",
+    "schema": {
+      "name": "",
+      "kind": "array",
+      "element": {
+        "name": "Redeem",
+        "kind": "object",
+        "keys": [
+          {
+            "name": "username",
+            "kind": "string"
+          },
+          {
+            "name": "display_name",
+            "kind": "string"
+          },
+          {
+            "name": "reward",
             "kind": "object",
             "keys": [
               {
-                "name": "Name",
+                "name": "enabled",
+                "kind": "boolean"
+              },
+              {
+                "name": "id",
                 "kind": "string"
               },
               {
-                "name": "ID",
+                "name": "name",
                 "kind": "string"
               },
               {
-                "name": "Count",
+                "name": "description",
+                "kind": "string"
+              },
+              {
+                "name": "image",
+                "kind": "string"
+              },
+              {
+                "name": "price",
                 "kind": "int"
               },
               {
-                "name": "Positions",
-                "kind": "array",
-                "element": {
-                  "name": "EmotePosition",
-                  "kind": "object",
-                  "keys": [
-                    {
-                      "name": "Start",
-                      "kind": "int"
-                    },
-                    {
-                      "name": "End",
-                      "kind": "int"
-                    }
-                  ]
-                }
+                "name": "required_info",
+                "kind": "string"
+              },
+              {
+                "name": "cooldown",
+                "kind": "int"
               }
-            ],
-            "isPointer": true
+            ]
+          },
+          {
+            "name": "when",
+            "kind": "datetime"
+          },
+          {
+            "name": "request_text",
+            "kind": "string"
           }
+        ]
+      }
+    }
+  },
+  "loyalty/ev/new-redeem": {
+    "description": "On reward redeemed",
+    "schema": {
+      "name": "Redeem",
+      "kind": "object",
+      "keys": [
+        {
+          "name": "username",
+          "kind": "string"
         },
         {
-          "name": "Bits",
-          "kind": "int"
+          "name": "display_name",
+          "kind": "string"
         },
         {
-          "name": "Action",
-          "kind": "boolean"
-        },
-        {
-          "name": "FirstMessage",
-          "kind": "boolean"
-        },
-        {
-          "name": "Reply",
+          "name": "reward",
           "kind": "object",
           "keys": [
             {
-              "name": "ParentMsgID",
+              "name": "enabled",
+              "kind": "boolean"
+            },
+            {
+              "name": "id",
               "kind": "string"
             },
             {
-              "name": "ParentUserID",
+              "name": "name",
               "kind": "string"
             },
             {
-              "name": "ParentUserLogin",
+              "name": "description",
               "kind": "string"
             },
             {
-              "name": "ParentDisplayName",
+              "name": "image",
               "kind": "string"
             },
             {
-              "name": "ParentMsgBody",
+              "name": "price",
+              "kind": "int"
+            },
+            {
+              "name": "required_info",
               "kind": "string"
+            },
+            {
+              "name": "cooldown",
+              "kind": "int"
             }
-          ],
-          "isPointer": true
+          ]
         },
         {
-          "name": "CustomRewardID",
+          "name": "when",
+          "kind": "datetime"
+        },
+        {
+          "name": "request_text",
           "kind": "string"
         }
       ]
@@ -724,37 +684,48 @@
       "event"
     ]
   },
-  "twitch/auth-keys": {
-    "description": "User access token for the twitch subsystem",
+  "twitch/bot-custom-commands": {
+    "description": "Chatbot custom commands",
     "schema": {
-      "name": "AuthResponse",
-      "kind": "object",
-      "keys": [
-        {
-          "name": "access_token",
-          "kind": "string"
-        },
-        {
-          "name": "refresh_token",
-          "kind": "string"
-        },
-        {
-          "name": "expires_in",
-          "kind": "int"
-        },
-        {
-          "name": "scope",
-          "kind": "array",
-          "element": {
-            "name": "string",
+      "name": "",
+      "kind": "dictionary",
+      "key": {
+        "name": "string",
+        "kind": "string"
+      },
+      "element": {
+        "name": "BotCustomCommand",
+        "kind": "object",
+        "keys": [
+          {
+            "name": "description",
+            "description": "Command description",
             "kind": "string"
+          },
+          {
+            "name": "access_level",
+            "description": "Minimum access level needed to use the command",
+            "kind": "enum",
+            "enumValues": [
+              "everyone",
+              "subscriber",
+              "vip",
+              "moderators",
+              "streamer"
+            ]
+          },
+          {
+            "name": "response",
+            "description": "Response template (in Go templating format)",
+            "kind": "string"
+          },
+          {
+            "name": "enabled",
+            "description": "Is the command enabled?",
+            "kind": "boolean"
           }
-        },
-        {
-          "name": "Time",
-          "kind": "datetime"
-        }
-      ]
+        ]
+      }
     }
   },
   "twitch/bot-modules/alerts/config": {
@@ -968,6 +939,130 @@
       ]
     }
   },
+  "twitch/ev/eventsub-event": {
+    "description": "On Eventsub event received",
+    "schema": {
+      "name": "NotificationMessagePayload",
+      "kind": "object",
+      "keys": [
+        {
+          "name": "subscription",
+          "kind": "object",
+          "keys": [
+            {
+              "name": "id",
+              "kind": "string"
+            },
+            {
+              "name": "type",
+              "kind": "string"
+            },
+            {
+              "name": "version",
+              "kind": "string"
+            },
+            {
+              "name": "status",
+              "kind": "string"
+            },
+            {
+              "name": "condition",
+              "kind": "object",
+              "keys": [
+                {
+                  "name": "broadcaster_user_id",
+                  "kind": "string"
+                },
+                {
+                  "name": "from_broadcaster_user_id",
+                  "kind": "string"
+                },
+                {
+                  "name": "to_broadcaster_user_id",
+                  "kind": "string"
+                },
+                {
+                  "name": "reward_id",
+                  "kind": "string"
+                },
+                {
+                  "name": "client_id",
+                  "kind": "string"
+                },
+                {
+                  "name": "extension_client_id",
+                  "kind": "string"
+                },
+                {
+                  "name": "user_id",
+                  "kind": "string"
+                }
+              ]
+            },
+            {
+              "name": "transport",
+              "kind": "object",
+              "keys": [
+                {
+                  "name": "method",
+                  "kind": "string"
+                },
+                {
+                  "name": "callback",
+                  "kind": "string"
+                },
+                {
+                  "name": "secret",
+                  "kind": "string"
+                },
+                {
+                  "name": "session_id",
+                  "kind": "string"
+                },
+                {
+                  "name": "connected_at",
+                  "kind": "string"
+                },
+                {
+                  "name": "disconnected_at",
+                  "kind": "string"
+                }
+              ]
+            },
+            {
+              "name": "created_at",
+              "kind": "object",
+              "keys": [
+                {
+                  "name": "Time",
+                  "kind": "datetime"
+                }
+              ]
+            },
+            {
+              "name": "cost",
+              "kind": "int"
+            }
+          ]
+        },
+        {
+          "name": "event",
+          "kind": "array",
+          "element": {
+            "name": "uint8",
+            "kind": "int"
+          }
+        },
+        {
+          "name": "date",
+          "kind": "datetime"
+        }
+      ]
+    },
+    "tags": [
+      "event"
+    ]
+  },
   "twitch/config": {
     "description": "General configuration for the Twitch subsystem",
     "schema": {
@@ -996,6 +1091,246 @@
         }
       ]
     }
+  },
+  "loyalty/@create-redeem": {
+    "description": "Create a new pending redeem",
+    "schema": {
+      "name": "Redeem",
+      "kind": "object",
+      "keys": [
+        {
+          "name": "username",
+          "kind": "string"
+        },
+        {
+          "name": "display_name",
+          "kind": "string"
+        },
+        {
+          "name": "reward",
+          "kind": "object",
+          "keys": [
+            {
+              "name": "enabled",
+              "kind": "boolean"
+            },
+            {
+              "name": "id",
+              "kind": "string"
+            },
+            {
+              "name": "name",
+              "kind": "string"
+            },
+            {
+              "name": "description",
+              "kind": "string"
+            },
+            {
+              "name": "image",
+              "kind": "string"
+            },
+            {
+              "name": "price",
+              "kind": "int"
+            },
+            {
+              "name": "required_info",
+              "kind": "string"
+            },
+            {
+              "name": "cooldown",
+              "kind": "int"
+            }
+          ]
+        },
+        {
+          "name": "when",
+          "kind": "datetime"
+        },
+        {
+          "name": "request_text",
+          "kind": "string"
+        }
+      ]
+    },
+    "tags": [
+      "rpc"
+    ]
+  },
+  "twitch/ev/chat-message": {
+    "description": "On chat message received",
+    "schema": {
+      "name": "PrivateMessage",
+      "kind": "object",
+      "keys": [
+        {
+          "name": "User",
+          "kind": "object",
+          "keys": [
+            {
+              "name": "ID",
+              "kind": "string"
+            },
+            {
+              "name": "Name",
+              "kind": "string"
+            },
+            {
+              "name": "DisplayName",
+              "kind": "string"
+            },
+            {
+              "name": "Color",
+              "kind": "string"
+            },
+            {
+              "name": "Badges",
+              "kind": "dictionary",
+              "key": {
+                "name": "string",
+                "kind": "string"
+              },
+              "element": {
+                "name": "int",
+                "kind": "int"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Raw",
+          "kind": "string"
+        },
+        {
+          "name": "Type",
+          "kind": "int"
+        },
+        {
+          "name": "RawType",
+          "kind": "string"
+        },
+        {
+          "name": "Tags",
+          "kind": "dictionary",
+          "key": {
+            "name": "string",
+            "kind": "string"
+          },
+          "element": {
+            "name": "string",
+            "kind": "string"
+          }
+        },
+        {
+          "name": "Message",
+          "kind": "string"
+        },
+        {
+          "name": "Channel",
+          "kind": "string"
+        },
+        {
+          "name": "RoomID",
+          "kind": "string"
+        },
+        {
+          "name": "ID",
+          "kind": "string"
+        },
+        {
+          "name": "Time",
+          "kind": "datetime"
+        },
+        {
+          "name": "Emotes",
+          "kind": "array",
+          "element": {
+            "name": "",
+            "kind": "object",
+            "keys": [
+              {
+                "name": "Name",
+                "kind": "string"
+              },
+              {
+                "name": "ID",
+                "kind": "string"
+              },
+              {
+                "name": "Count",
+                "kind": "int"
+              },
+              {
+                "name": "Positions",
+                "kind": "array",
+                "element": {
+                  "name": "EmotePosition",
+                  "kind": "object",
+                  "keys": [
+                    {
+                      "name": "Start",
+                      "kind": "int"
+                    },
+                    {
+                      "name": "End",
+                      "kind": "int"
+                    }
+                  ]
+                }
+              }
+            ],
+            "isPointer": true
+          }
+        },
+        {
+          "name": "Bits",
+          "kind": "int"
+        },
+        {
+          "name": "Action",
+          "kind": "boolean"
+        },
+        {
+          "name": "FirstMessage",
+          "kind": "boolean"
+        },
+        {
+          "name": "Reply",
+          "kind": "object",
+          "keys": [
+            {
+              "name": "ParentMsgID",
+              "kind": "string"
+            },
+            {
+              "name": "ParentUserID",
+              "kind": "string"
+            },
+            {
+              "name": "ParentUserLogin",
+              "kind": "string"
+            },
+            {
+              "name": "ParentDisplayName",
+              "kind": "string"
+            },
+            {
+              "name": "ParentMsgBody",
+              "kind": "string"
+            }
+          ],
+          "isPointer": true
+        },
+        {
+          "name": "CustomRewardID",
+          "kind": "string"
+        }
+      ]
+    },
+    "tags": [
+      "event"
+    ]
   },
   "twitch/bot-modules/timers/config": {
     "description": "Configuration of chat bot timers",
@@ -1050,72 +1385,6 @@
       ]
     }
   },
-  "loyalty/@create-redeem": {
-    "description": "Create a new pending redeem",
-    "schema": {
-      "name": "Redeem",
-      "kind": "object",
-      "keys": [
-        {
-          "name": "username",
-          "kind": "string"
-        },
-        {
-          "name": "display_name",
-          "kind": "string"
-        },
-        {
-          "name": "reward",
-          "kind": "object",
-          "keys": [
-            {
-              "name": "enabled",
-              "kind": "boolean"
-            },
-            {
-              "name": "id",
-              "kind": "string"
-            },
-            {
-              "name": "name",
-              "kind": "string"
-            },
-            {
-              "name": "description",
-              "kind": "string"
-            },
-            {
-              "name": "image",
-              "kind": "string"
-            },
-            {
-              "name": "price",
-              "kind": "unknown"
-            },
-            {
-              "name": "required_info",
-              "kind": "string"
-            },
-            {
-              "name": "cooldown",
-              "kind": "unknown"
-            }
-          ]
-        },
-        {
-          "name": "when",
-          "kind": "datetime"
-        },
-        {
-          "name": "request_text",
-          "kind": "string"
-        }
-      ]
-    },
-    "tags": [
-      "rpc"
-    ]
-  },
   "http/config": {
     "description": "General server configuration",
     "schema": {
@@ -1141,133 +1410,111 @@
       ]
     }
   },
-  "twitch/eventsub-history": {
-    "description": "Last eventsub notifications received",
+  "twitch/auth-keys": {
+    "description": "User access token for the twitch subsystem",
+    "schema": {
+      "name": "AuthResponse",
+      "kind": "object",
+      "keys": [
+        {
+          "name": "access_token",
+          "kind": "string"
+        },
+        {
+          "name": "refresh_token",
+          "kind": "string"
+        },
+        {
+          "name": "expires_in",
+          "kind": "int"
+        },
+        {
+          "name": "scope",
+          "kind": "array",
+          "element": {
+            "name": "string",
+            "kind": "string"
+          }
+        },
+        {
+          "name": "Time",
+          "kind": "datetime"
+        }
+      ]
+    }
+  },
+  "twitch/stream-info": {
+    "description": "List of active twitch streams (1 element if live, 0 otherwise)",
     "schema": {
       "name": "",
       "kind": "array",
       "element": {
-        "name": "NotificationMessagePayload",
+        "name": "Stream",
         "kind": "object",
         "keys": [
           {
-            "name": "subscription",
-            "kind": "object",
-            "keys": [
-              {
-                "name": "id",
-                "kind": "string"
-              },
-              {
-                "name": "type",
-                "kind": "string"
-              },
-              {
-                "name": "version",
-                "kind": "string"
-              },
-              {
-                "name": "status",
-                "kind": "string"
-              },
-              {
-                "name": "condition",
-                "kind": "object",
-                "keys": [
-                  {
-                    "name": "broadcaster_user_id",
-                    "kind": "string"
-                  },
-                  {
-                    "name": "from_broadcaster_user_id",
-                    "kind": "string"
-                  },
-                  {
-                    "name": "to_broadcaster_user_id",
-                    "kind": "string"
-                  },
-                  {
-                    "name": "reward_id",
-                    "kind": "string"
-                  },
-                  {
-                    "name": "client_id",
-                    "kind": "string"
-                  },
-                  {
-                    "name": "extension_client_id",
-                    "kind": "string"
-                  },
-                  {
-                    "name": "user_id",
-                    "kind": "string"
-                  }
-                ]
-              },
-              {
-                "name": "transport",
-                "kind": "object",
-                "keys": [
-                  {
-                    "name": "method",
-                    "kind": "string"
-                  },
-                  {
-                    "name": "callback",
-                    "kind": "string"
-                  },
-                  {
-                    "name": "secret",
-                    "kind": "string"
-                  },
-                  {
-                    "name": "session_id",
-                    "kind": "string"
-                  },
-                  {
-                    "name": "connected_at",
-                    "kind": "string"
-                  },
-                  {
-                    "name": "disconnected_at",
-                    "kind": "string"
-                  }
-                ]
-              },
-              {
-                "name": "created_at",
-                "kind": "object",
-                "keys": [
-                  {
-                    "name": "Time",
-                    "kind": "datetime"
-                  }
-                ]
-              },
-              {
-                "name": "cost",
-                "kind": "int"
-              }
-            ]
+            "name": "id",
+            "kind": "string"
           },
           {
-            "name": "event",
+            "name": "user_id",
+            "kind": "string"
+          },
+          {
+            "name": "user_login",
+            "kind": "string"
+          },
+          {
+            "name": "user_name",
+            "kind": "string"
+          },
+          {
+            "name": "game_id",
+            "kind": "string"
+          },
+          {
+            "name": "game_name",
+            "kind": "string"
+          },
+          {
+            "name": "tag_ids",
             "kind": "array",
             "element": {
-              "name": "uint8",
-              "kind": "int"
+              "name": "string",
+              "kind": "string"
             }
           },
           {
-            "name": "date",
+            "name": "is_mature",
+            "kind": "boolean"
+          },
+          {
+            "name": "type",
+            "kind": "string"
+          },
+          {
+            "name": "title",
+            "kind": "string"
+          },
+          {
+            "name": "viewer_count",
+            "kind": "int"
+          },
+          {
+            "name": "started_at",
             "kind": "datetime"
+          },
+          {
+            "name": "language",
+            "kind": "string"
+          },
+          {
+            "name": "thumbnail_url",
+            "kind": "string"
           }
         ]
       }
-    },
-    "tags": [
-      "history"
-    ]
+    }
   },
   "twitch/chat-activity": {
     "description": "Number of chat messages in the last minute",
@@ -1276,264 +1523,17 @@
       "kind": "int"
     }
   },
-  "twitch/bot-config": {
-    "description": "General configuration for the Twitch chatbot",
+  "loyalty/points/<user>": {
+    "description": "Point entry for a given user",
     "schema": {
-      "name": "BotConfig",
+      "name": "PointsEntry",
       "kind": "object",
       "keys": [
         {
-          "name": "username",
-          "description": "Chatbot username (for internal use, ignored by Twitch)",
-          "kind": "string"
-        },
-        {
-          "name": "oauth",
-          "description": "OAuth key for IRC authentication",
-          "kind": "string"
-        },
-        {
-          "name": "channel",
-          "description": "Twitch channel to join and use",
-          "kind": "string"
-        },
-        {
-          "name": "chat_history",
-          "description": "How many messages to keep in twitch/chat-history",
+          "name": "points",
           "kind": "int"
         }
       ]
     }
-  },
-  "loyalty/rewards": {
-    "description": "List of available rewards",
-    "schema": {
-      "name": "",
-      "kind": "array",
-      "element": {
-        "name": "Reward",
-        "kind": "object",
-        "keys": [
-          {
-            "name": "enabled",
-            "kind": "boolean"
-          },
-          {
-            "name": "id",
-            "kind": "string"
-          },
-          {
-            "name": "name",
-            "kind": "string"
-          },
-          {
-            "name": "description",
-            "kind": "string"
-          },
-          {
-            "name": "image",
-            "kind": "string"
-          },
-          {
-            "name": "price",
-            "kind": "unknown"
-          },
-          {
-            "name": "required_info",
-            "kind": "string"
-          },
-          {
-            "name": "cooldown",
-            "kind": "unknown"
-          }
-        ]
-      }
-    }
-  },
-  "loyalty/goals": {
-    "description": "List of all goals",
-    "schema": {
-      "name": "",
-      "kind": "array",
-      "element": {
-        "name": "Goal",
-        "kind": "object",
-        "keys": [
-          {
-            "name": "enabled",
-            "kind": "boolean"
-          },
-          {
-            "name": "id",
-            "kind": "string"
-          },
-          {
-            "name": "name",
-            "kind": "string"
-          },
-          {
-            "name": "description",
-            "kind": "string"
-          },
-          {
-            "name": "image",
-            "kind": "string"
-          },
-          {
-            "name": "total",
-            "kind": "unknown"
-          },
-          {
-            "name": "contributed",
-            "kind": "unknown"
-          },
-          {
-            "name": "contributors",
-            "kind": "dictionary",
-            "key": {
-              "name": "string",
-              "kind": "string"
-            },
-            "element": {
-              "name": "int64",
-              "kind": "unknown"
-            }
-          }
-        ]
-      }
-    }
-  },
-  "loyalty/redeem-queue": {
-    "description": "All pending redeems",
-    "schema": {
-      "name": "",
-      "kind": "array",
-      "element": {
-        "name": "Redeem",
-        "kind": "object",
-        "keys": [
-          {
-            "name": "username",
-            "kind": "string"
-          },
-          {
-            "name": "display_name",
-            "kind": "string"
-          },
-          {
-            "name": "reward",
-            "kind": "object",
-            "keys": [
-              {
-                "name": "enabled",
-                "kind": "boolean"
-              },
-              {
-                "name": "id",
-                "kind": "string"
-              },
-              {
-                "name": "name",
-                "kind": "string"
-              },
-              {
-                "name": "description",
-                "kind": "string"
-              },
-              {
-                "name": "image",
-                "kind": "string"
-              },
-              {
-                "name": "price",
-                "kind": "unknown"
-              },
-              {
-                "name": "required_info",
-                "kind": "string"
-              },
-              {
-                "name": "cooldown",
-                "kind": "unknown"
-              }
-            ]
-          },
-          {
-            "name": "when",
-            "kind": "datetime"
-          },
-          {
-            "name": "request_text",
-            "kind": "string"
-          }
-        ]
-      }
-    }
-  },
-  "loyalty/ev/new-redeem": {
-    "description": "On reward redeemed",
-    "schema": {
-      "name": "Redeem",
-      "kind": "object",
-      "keys": [
-        {
-          "name": "username",
-          "kind": "string"
-        },
-        {
-          "name": "display_name",
-          "kind": "string"
-        },
-        {
-          "name": "reward",
-          "kind": "object",
-          "keys": [
-            {
-              "name": "enabled",
-              "kind": "boolean"
-            },
-            {
-              "name": "id",
-              "kind": "string"
-            },
-            {
-              "name": "name",
-              "kind": "string"
-            },
-            {
-              "name": "description",
-              "kind": "string"
-            },
-            {
-              "name": "image",
-              "kind": "string"
-            },
-            {
-              "name": "price",
-              "kind": "unknown"
-            },
-            {
-              "name": "required_info",
-              "kind": "string"
-            },
-            {
-              "name": "cooldown",
-              "kind": "unknown"
-            }
-          ]
-        },
-        {
-          "name": "when",
-          "kind": "datetime"
-        },
-        {
-          "name": "request_text",
-          "kind": "string"
-        }
-      ]
-    },
-    "tags": [
-      "event"
-    ]
   }
 }
