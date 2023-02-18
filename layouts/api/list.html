@@ -4,12 +4,23 @@
       {{ with $.name }}
         <div class="nameblock"><span class="name">{{ . }}</span>:</div>
       {{ end }}
-      arrayOf [
-      {{ template  "schema" . }}
-      ]
+      {{ if (eq $.kind "array") }}
+        <span class="kind {{ $.kind }}">arrayOf</span> [
+        {{ template  "schema" . }}
+        ]
+      {{ end }}
+      {{ if (eq $.kind "dictionary") }}
+        <span class="kind {{ $.kind }}">dictionary</span>
+        <div class="dict">
+          <
+          <span class="key">
+            <span class="kind {{ $.key.kind }}">{{ $.key.name }}</span></span
+          >, <span class="element">{{ template  "schema" . }}</span>>
+        </div>
+      {{ end }}
     {{ else }}
       {{ if (eq .name .kind) }}
-        <span class="kind">{{ .kind }}</span>
+        <span class="kind {{ $.kind }}">{{ .kind }}</span>
       {{ else }}
         {{ with .name }}
           <div class="nameblock">
@@ -20,7 +31,7 @@
             {{ end }}:
           </div>
         {{ end }}
-        <span class="kind">{{ .kind }}</span>
+        <span class="kind {{ $.kind }}">{{ .kind }}</span>
       {{ end }}
       {{ with .keys }}
         {

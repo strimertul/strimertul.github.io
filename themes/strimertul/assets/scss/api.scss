@@ -78,6 +78,11 @@
   .nameblock {
     display: none;
   }
+  .kind.array,
+  .kind.object,
+  .kind.dictionary {
+    color: $grass12;
+  }
   li {
     list-style-type: none;
     & > code > .nameblock {
@@ -88,6 +93,15 @@
           content: '"';
         }
       }
+    }
+  }
+  .dict {
+    display: inline;
+    .key {
+      display: inline;
+    }
+    .element {
+      display: inline;
     }
   }
   ul {
