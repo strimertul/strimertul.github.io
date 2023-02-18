@@ -87,6 +87,7 @@
     list-style-type: none;
     & > code > .nameblock {
       display: inline-flex;
+      padding-right: 0.5rem;
       & > .name {
         &::before,
         &::after {
