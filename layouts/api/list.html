@@ -2,7 +2,7 @@
   <code>
     {{ with .element }}
       {{ with $.name }}
-        <div class="nameblock"><span class="name">{{ . }}</span>:</div>
+        <div class="nameblock"><span class="name">{{ . }}</span>{{ ": " }}</div>
       {{ end }}
       {{ if (eq $.kind "array") }}
         <span class="kind {{ $.kind }}">arrayOf</span> [
@@ -28,7 +28,7 @@
               <abbr class="pointer" title="Optional, might not be in the object"
                 >*</abbr
               >
-            {{ end }}:
+            {{ end }}{{ ": " }}
           </div>
         {{ end }}
         <span class="kind {{ $.kind }}">{{ .kind }}</span>
