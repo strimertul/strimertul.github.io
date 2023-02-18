@@ -75,6 +75,18 @@
 
 .schema {
   margin-top: 1rem;
+  code > ul:first-of-type > li > blockquote {
+    padding-top: 0;
+  }
+  blockquote {
+    margin: 0;
+    padding: 0;
+    padding-top: 0.5rem;
+    color: $gray9;
+    &::before {
+      content: "// ";
+    }
+  }
   .nameblock {
     display: none;
   }
