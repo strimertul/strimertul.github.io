@@ -72,12 +72,18 @@ p {
   }
 }
 
-.appname {
+a.appname {
   padding: 10px;
+  text-decoration: none;
+  color: white;
 }
 
 .container {
   max-width: 960px;
   width: 100%;
   margin: 0 auto;
+}
+
+.hidden {
+  display: none;
 }

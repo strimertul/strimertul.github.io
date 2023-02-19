@@ -7,6 +7,9 @@
     & > nav {
       display: none;
     }
+    & > div.doc {
+      padding: 1rem;
+    }
   }
   & > nav,
   & > .doc {
@@ -14,6 +17,7 @@
     padding: 1rem;
   }
   & > nav {
+    background-color: $gray2;
     padding: 0;
     grid-column: 1;
     ul {
@@ -44,6 +48,7 @@
   }
   & > .doc {
     grid-column: 2;
+    padding: 1rem 2rem;
   }
   .monotitle {
     font-family: "Iosevka Web", monospace;

@@ -2,14 +2,86 @@
   <main class="landing">
     <section class="hero maxw">
       <div class="hero-copy">
-        <h1>HEY PUT TEXT HERE!</h1>
-        <div class="download-button">
-          <a href="https://github.com/strimertul/strimertul/releases/latest">
-            Download
-          </a>
+        <h1>The streaming companion for power users</h1>
+        <p>
+          strimertül is a free and open source companion to your tech stack for
+          creating powerful overlays and power up the viewer interaction in your
+          Twitch streams!
+        </p>
+        <div id="download">
+          <noscript>
+            <a href="https://github.com/strimertul/strimertul/releases/latest">
+              Check out the latest version on GitHub
+            </a>
+          </noscript>
+          <div class="hidden" id="download-template">
+            <h2>
+              Latest release:
+              <a href="https://github.com/strimertul/strimertul/releases/latest"
+                ><span data-field="name"></span> (<time data-field="date"></time
+                >)</a
+              >
+            </h2>
+            <div class="download-list"><b>Downloads:</b></div>
+          </div>
         </div>
+        <script>
+          const platforms = [
+            {
+              filter: ".exe",
+              name: "Windows 64-bit",
+            },
+            {
+              filter: ".dmg",
+              name: "macOS Universal",
+            },
+            {
+              filter: "linux",
+              name: "Linux AMD64",
+            },
+          ];
+          (async function () {
+            const releaseblock = document.getElementById("download-template");
+            const latest = await (
+              await fetch(
+                "https://api.github.com/repos/strimertul/strimertul/releases/latest"
+              )
+            ).json();
+            // Poor's man angularjs
+            const data = {
+              ...latest,
+              date: new Date(latest.published_at).toLocaleDateString(),
+            };
+            releaseblock.querySelectorAll("*[data-field]").forEach((el) => {
+              const { field } = el.dataset;
+              if (field in data) {
+                el.innerHTML = data[field];
+              }
+            });
+            // Make those links
+            const downloadLinks = releaseblock.querySelector(".download-list");
+            latest.assets
+              .map((asset) => [
+                platforms.findIndex(({ filter }) =>
+                  asset.name.includes(filter)
+                ),
+                asset.browser_download_url,
+              ])
+              .filter(([index]) => index >= 0)
+              .sort(([a], [b]) => a - b)
+              .forEach(([index, url]) => {
+                const link = document.createElement("a");
+                link.classList.add("download-link");
+                link.href = url;
+                link.appendChild(
+                  document.createTextNode(platforms[index].name)
+                );
+                downloadLinks.appendChild(link);
+              });
+            releaseblock.classList.remove("hidden");
+          })();
+        </script>
       </div>
-      <div class="screenshots"></div>
     </section>
     <section class="features">
       <article>
