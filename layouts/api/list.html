@@ -32,7 +32,13 @@
             {{ end }}:
           </div>
         {{ end }}
-        <span class="kind {{ $.kind }}">{{ .kind }}</span>
+        {{ if (eq $.kind "enum") }}
+          <span class="kind {{ $.kind }}">enum</span> (
+          {{ with $.enumValues }}{{ delimit . " | " }}{{ end }}
+          )
+        {{ else }}
+          <span class="kind {{ $.kind }}">{{ .kind }}</span>
+        {{ end }}
       {{ end }}
       {{ with .keys }}
         {
