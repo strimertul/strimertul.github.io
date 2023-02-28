@@ -87,3 +87,14 @@ a.appname {
 .hidden {
   display: none;
 }
+
+html,
+body,
+.content {
+  min-height: 100vh;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,28 @@
+<nav>
+  {{ $currentPage := .context }}
+  {{ range .menu }}
+    {{ if .HasChildren }}
+      <header>{{ .Title }}</header>
+      <ul class="sub-menu">
+        {{ range .Children }}
+          <li
+            class="{{ if $currentPage.IsMenuCurrent "guides" . }}
+              active
+            {{ end }}"
+          >
+            <a href="{{ .URL }}">{{ .Name }}</a>
+          </li>
+        {{ end }}
+      </ul>
+    {{ else }}
+      <ul>
+        <li>
+          <a href="{{ .URL }}">
+            {{ .Pre }}
+            <span>{{ .Name }}</span>
+          </a>
+        </li>
+      </ul>
+    {{ end }}
+  {{ end }}
+</nav>
