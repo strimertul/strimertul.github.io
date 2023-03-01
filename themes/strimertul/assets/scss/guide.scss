@@ -161,11 +161,17 @@
     margin-top: 2rem;
   }
 
-  p {
-    line-height: 1.5;
-    margin-bottom: 1em;
-  }
-
-  .pages {
+  .guide-pic {
+    img {
+      max-width: 100%;
+      border: 2px solid $gray4;
+      border-radius: 3px;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    &.flashbang {
+      img {
+        filter: brightness(80%) contrast(80%);
+      }
+    }
   }
 }
