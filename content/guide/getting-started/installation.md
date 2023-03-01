@@ -3,6 +3,7 @@ title: Installation
 menu:
   guides:
     parent: gettingstarted
+weight: 10
 ---
 
 To install strimertül, choose one of the following methods. If you're not a developer or have particular needs, you should follow the recommended method.
