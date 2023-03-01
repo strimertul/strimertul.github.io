@@ -2,6 +2,7 @@
   <main class="guide">
     {{ partial "menu.html" (dict "context" . "menu" $.Site.Menus.guides) }}
     <div class="doc">
+      <header><h1>{{ .Title }}</h1></header>
       <section class="copy">{{ .Content }}</section>
     </div>
   </main>

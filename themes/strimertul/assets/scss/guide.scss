@@ -12,6 +12,9 @@
       padding: 1rem;
     }
   }
+  @media (min-width: 1200px) {
+    grid-template-columns: 1fr 1000px 1fr;
+  }
   & > nav,
   & > .doc {
     grid-row: 1;
@@ -148,5 +151,13 @@
   }
   .kind {
     color: $grass10;
+  }
+}
+
+.doc {
+  h2 {
+    border-bottom: 1px solid $gray5;
+    padding-bottom: 0.4rem;
+    margin-top: 2rem;
   }
 }
