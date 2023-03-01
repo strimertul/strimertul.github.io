@@ -61,7 +61,9 @@
       <ul>
         {{ range $key, $spec := $keys }}
           <li>
-            <a href="#{{ anchorize $key }}" class="monotitle">{{ $key }}</a>
+            <a href="#{{ anchorize $key | safeURL }}" class="monotitle"
+              >{{ $key }}</a
+            >
           </li>
         {{ end }}
       </ul>
@@ -70,9 +72,12 @@
       <section class="copy">{{ .Content }}</section>
       <section class="reference">
         {{ range $key, $spec := $keys }}
-          <article class="api" id="{{ anchorize $key }}">
+          <article class="api" id="{{ anchorize $key | safeURL }}">
             <header>
               <h3>
+                <a href="#{{ anchorize $key | safeURL }}" class="heading-anchor"
+                  >#</a
+                >
                 <span class="monotitle">{{ $key }}</span> {{ range .tags }}
                   <span class="tag {{ . }}">{{ . }}</span>
                 {{ end }}
