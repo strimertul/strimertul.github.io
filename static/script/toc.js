@@ -18,7 +18,9 @@ if (toc) {
         (i) => getId(i.target) && i.intersectionRatio > 0
       );
       if (filtered.length > 0) {
-        toc.querySelector(`li.active`)?.classList.remove("active");
+        toc
+          .querySelectorAll(`li.active`)
+          .forEach((entry) => entry.classList.remove("active"));
         filtered.forEach((entry) => {
           const id = getId(entry.target);
           toc
