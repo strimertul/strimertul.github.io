@@ -5,5 +5,10 @@
       <header><h1>{{ .Title }}</h1></header>
       <section class="copy">{{ .Content }}</section>
     </div>
+    <div class="toc">
+      <header>In this page:</header>
+      {{ .TableOfContents }}
+    </div>
   </main>
+  <script async defer src="/script/toc.js"></script>
 {{ end }}

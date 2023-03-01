@@ -175,3 +175,53 @@
     }
   }
 }
+
+.toc {
+  @media only screen and (max-width: 1400px) {
+    display: none;
+  }
+  padding: 0;
+  position: fixed;
+  right: 0;
+  top: 60px;
+  header {
+    font-weight: bold;
+    padding: 0.6rem 0.9rem;
+    margin-top: 0.5rem;
+  }
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    li {
+      display: flex;
+      align-items: stretch;
+      justify-content: stretch;
+      transition: all 100ms;
+      font-size: 14px;
+      border-left: 5px solid $gray3;
+      &.active {
+        pointer-events: none;
+        border-left-color: $teal8;
+        a {
+          color: $teal11;
+        }
+      }
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+      a {
+        flex: 1;
+        padding: 0.6rem 1rem;
+        color: $teal12;
+        text-decoration: none;
+        &:first-of-type {
+          padding-top: 0.8rem;
+        }
+      }
+      a:hover {
+        color: $teal11;
+      }
+    }
+  }
+}
