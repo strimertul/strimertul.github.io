@@ -21,6 +21,8 @@
     padding: 1rem;
   }
   & > nav {
+    display: flex;
+    flex-direction: column;
     background-color: $gray2;
     padding: 0;
     grid-column: 1;
@@ -95,6 +97,17 @@
       }
     }
   }
+}
+
+select {
+  background-color: $gray2;
+  color: $gray12;
+  border-radius: 4px;
+}
+
+#api-version {
+  margin: 1rem;
+  margin-bottom: 0;
 }
 
 .schema {
