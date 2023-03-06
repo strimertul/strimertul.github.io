@@ -4,7 +4,6 @@ menu:
   guides:
     parent: features
 weight: 10
-draft: true
 ---
 
 strimertül comes bundles with a chat bot for Twitch. You can access its settings in the side menu under "Twitch".
@@ -59,11 +58,27 @@ In addition to these chat specific functions, the entire sprig function library 
 
 Chat timers are messages that are written on repeating intervals as long as some chat activity conditions are met (so the bot doesn't keep screaming into the void!)
 
-TODO
+The timer page looks mostly like the chat commands page, with timers being either enabled or disabled, sorted alphabetically by name and with a search box for easy filtering.
 
 {{< figure src="../media/chatbot/timer-overview.png" class="guide-pic" alt="Overview of the chat timers configuration page" >}}
 
+To manage timers, click the "New timer" at the top of the page or the "Edit" command of any of the existing timers, a dialog will appear with info to fill out about it.
+
 {{< figure src="../media/chatbot/timerbox.png" class="guide-pic" alt="The dialog for editing a timer" >}}
+
+The fields for a timer are:
+
+Timer name
+: A unique identifier, used only within the user interface and API
+
+Minimum interval
+: How long to wait before the timer attempts to write the message again. If the chat activity condition has not been met yet, the timer will fire as soon as it is and then start waiting again.
+
+Minimum chat activity
+: Adds a chat activity condition to timers so that they will only fire when there has been at least a certain amount of messages in chat. You can set it to 0 to disable it, but this might end up spamming your chat if it's being quiet.
+
+Messages
+: Messages to write to chat, you can make multiple messages and the timer will pick one at random each time.
 
 ## Chat alerts
 
