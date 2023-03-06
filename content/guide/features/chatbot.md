@@ -82,8 +82,48 @@ Messages
 
 ## Chat alerts
 
-TODO
+Chat alerts are messages that get written to chat when certain events happen. These include viewer actions like following, subscribing or incoming raids from other channels.
+
+The alerts page is structured as a tabbed view with each tab referring to a single event.
+
+{{< figure src="../media/chatbot/alert-overview.png" class="guide-pic" alt="Overview of the chat alerts configuration page" >}}
+
+Alerts can be enabled and disabled for every event, and you can specify multiple message for each (one at random will be chosen when the event happens).
+
+Alert messages use the [Go templating system](https://pkg.go.dev/text/template) but with a different scheme than chat messages, see below for more info.
+
+When you're done changing your options, make sure to click "Save" to save and apply any change you have made!
+
+### Variables for alerts
+
+The template for alert messages uses an EventSub payload, you can check the full schema [here](https://github.com/nicklaw5/helix/blob/main/eventsub.go) but it may prove difficult to parse, so here's an easier reference:
+
+| Event             | Description                        | Usage                          | Example output     |
+| ----------------- | ---------------------------------- | ------------------------------ | ------------------ |
+| Every except raid | Viewer name                        | `{{.UserName}}`                | AshKeelVT          |
+| Subscription      | Resub message                      | `{{.Message}}`                 | Hey have a sub     |
+| Subscription      | Subscription tier (1000/2000/3000) | `{{.Tier}}`                    | 1000               |
+| Subscription      | Subscription months (total)        | `{{.CumulativeMonths}}`        | 69                 |
+| Subscription      | Subscription months (streak)       | `{{.StreakMonths}}`            | 7                  |
+| Subscription      | Subscription duration              | `{{.DurationMonths}}`          | 3                  |
+| Subscription      | Was the subscription donated?      | `{{.IsGift}}`                  | false              |
+| Gift Sub          | How many gift sub were just given  | `{{.Total}}`                   | 2                  |
+| Gift Sub          | Total gift subs from that viewer   | `{{.CumulativeTotal}}`         | 32                 |
+| Gift Sub          | Was the gift sub anonymous?        | `{{.IsAnonymous}}`             | false              |
+| Raid              | Name of who raided                 | `{{.FromBroadcasterUserName}}` | EnfieldVT          |
+| Raid              | How many viewers in the raid       | `{{.ViewerCount}}`             | 420                |
+| Cheer             | Cheer message                      | `{{.Message}}`                 | Hey have some bits |
+| Cheer             | How many bits were cheered         | `{{.Bits}}`                    | 1337               |
+| Cheer             | Was the cheering anonymous?        | `{{.IsAnonymous}}`             | false              |
 
 ## External scripts and extensions
 
-TODO
+Like the rest of strimertül, all you need to interact with Twitch chat is use Kilovolt keys.
+
+To listen for incoming messages from users/other bots you can subscribe to this key:  
+`twitch/ev/chat-message`  
+Messages will be in JSON format, check the [API reference](/api/) for the schema.
+
+You can write arbitrary messages to chat as the strimertul bot by writing to this key:  
+`twitch/@send-chat-message`  
+No format needed, just write the string you want to see in chat!
