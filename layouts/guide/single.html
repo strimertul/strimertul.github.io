@@ -1,6 +1,5 @@
 {{ define "main" }}
   <main class="guide">
-    {{ partial "menu.html" (dict "context" . "menu" $.Site.Menus.guides) }}
     <div class="doc">
       <header><h1>{{ .Title }}</h1></header>
       <section class="copy">{{ .Content }}</section>
@@ -9,6 +8,7 @@
       <header>In this page:</header>
       {{ .TableOfContents }}
     </div>
+    {{ partial "menu.html" (dict "context" . "menu" $.Site.Menus.guides) }}
   </main>
   <script async defer src="/script/toc.js"></script>
 {{ end }}

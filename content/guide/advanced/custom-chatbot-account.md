@@ -1,5 +1,5 @@
 ---
-title: Custom account for chatbot
+title: Custom account for chat bot
 menu:
   guides:
     parent: advanced

@@ -1,8 +1,11 @@
 {{ define "main" }}
   <main class="guide">
-    {{ partial "menu.html" (dict "context" . "menu" $.Site.Menus.guides) }}
     <div class="doc">
-      <section class="copy">{{ .Content }}</section>
+      <section class="copy">
+        <h1>{{ .Title }}</h1>
+        {{ .Content }}
+      </section>
     </div>
+    {{ partial "menu.html" (dict "context" . "menu" $.Site.Menus.guides) }}
   </main>
 {{ end }}

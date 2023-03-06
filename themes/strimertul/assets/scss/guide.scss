@@ -4,15 +4,15 @@
   grid-template-rows: 1fr;
   grid-template-columns: 250px 1fr;
   @media only screen and (max-width: $mobile) {
-    grid-template-columns: 1fr;
-    & > nav {
-      display: none;
-    }
+    display: flex;
+    flex-direction: column;
     & > div.doc {
       padding: 1rem;
+      grid-column: 1;
+      grid-row: 1;
     }
   }
-  @media (min-width: 1200px) {
+  @media (min-width: 1500px) {
     grid-template-columns: 1fr 1000px 1fr;
   }
   & > nav,
@@ -160,6 +160,11 @@
     padding-bottom: 0.4rem;
     margin-top: 2rem;
   }
+  h3 {
+    padding-bottom: 0.4rem;
+    margin-top: 2rem;
+    font-size: 20px;
+  }
 
   .guide-pic {
     img {
@@ -177,7 +182,7 @@
 }
 
 .toc {
-  @media only screen and (max-width: 1400px) {
+  @media only screen and (max-width: 1500px) {
     display: none;
   }
   padding: 0;
@@ -189,28 +194,30 @@
     padding: 0.6rem 0.9rem;
     margin-top: 0.5rem;
   }
-  ul {
+  #TableOfContents > ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     li {
       display: flex;
+      flex-direction: column;
       align-items: stretch;
       justify-content: stretch;
       transition: all 100ms;
       font-size: 14px;
-      border-left: 5px solid $gray3;
-      &.active {
-        pointer-events: none;
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      &.active > a {
         border-left-color: $teal8;
-        a {
-          color: $teal11;
-        }
+        color: $teal11;
       }
       &:hover {
         background-color: rgba(255, 255, 255, 0.05);
       }
       a {
+        border-left: 5px solid $gray3;
         flex: 1;
         padding: 0.6rem 1rem;
         color: $teal12;
@@ -222,6 +229,41 @@
       a:hover {
         color: $teal11;
       }
+    }
+  }
+}
+
+.copy {
+  ul li {
+    line-height: 1.4;
+  }
+
+  dl {
+    dt {
+      font-weight: bold;
+      margin-bottom: 0.3em;
+    }
+    dd {
+      margin-left: 1em;
+      margin-bottom: 0.8em;
+    }
+  }
+
+  table {
+    border-collapse: collapse;
+    margin-bottom: 1em;
+    th,
+    td {
+      padding: 5px 8px;
+    }
+    th {
+      background-color: $gray4;
+      border: 1px solid $gray2;
+      color: $teal11;
+    }
+    td {
+      background-color: $gray2;
+      border: 1px solid $gray1;
     }
   }
 }
