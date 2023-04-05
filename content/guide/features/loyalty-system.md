@@ -135,3 +135,15 @@ There are several shortcuts for this. You can use `!contribute POINTS` to contri
 You can combine both by just using `!contribute` to contribute 100 points to the first available goal.
 
 {{< figure src="../media/loyalty/contribute-shortcut.png" class="guide-pic" alt="Using the !contribute shortcuts" >}}
+
+## External scripts and extensions
+
+Like the rest of strimertül, the loyalty system uses Kilovolt keys for everything:
+
+- Every viewer with points has a balance accessible at [`loyalty/points/<username>`](/api/v31/#loyaltypointsuser)
+- All pending redeems are stored as an array at [`loyalty/redeem-queue`](/api/v31/#loyaltyredeem-queue)
+- The list of all rewards to redeem can be found at [`loyalty/rewards`](/api/v31/#loyaltyrewards)
+- The list of all goals is at [`loyalty/goals`](/api/v31/#loyaltygoals)
+- To listen for new redeems, subscribe to [`loyalty/ev/new-redeem`](/api/v31/#loyaltyevnew-redeem)
+- To create a new redeem, write to [`loyalty/@create-redeem`](/api/v31/#loyaltycreate-redeem)
+- To remove a redeem from the queue, write to [`loyalty/@remove-redeem`](/api/v31/#loyaltyremove-redeem)
