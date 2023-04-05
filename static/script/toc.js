@@ -1,10 +1,12 @@
 const toc = document.getElementById("TableOfContents");
 
-const getId = (el) => {
+const getHeaderId = (el) => {
   do {
-    const id = el.getAttribute("id");
-    if (id) {
-      return id;
+    if (el.nodeName === "H1" || el.nodeName === "H2" || el.nodeName === "H3") {
+      const id = el.getAttribute("id");
+      if (id) {
+        return id;
+      }
     }
     el = el.previousElementSibling;
   } while (el);
@@ -15,14 +17,15 @@ if (toc) {
   } else {
     const observer = new IntersectionObserver((entries) => {
       const filtered = entries.filter(
-        (i) => getId(i.target) && i.intersectionRatio > 0
+        (i) => getHeaderId(i.target) && i.intersectionRatio > 0
       );
       if (filtered.length > 0) {
         toc
           .querySelectorAll(`li.active`)
           .forEach((entry) => entry.classList.remove("active"));
+
         filtered.forEach((entry) => {
-          const id = getId(entry.target);
+          const id = getHeaderId(entry.target);
           toc
             .querySelector(`li a[href="#${id}"]`)
             .parentElement.classList.add("active");
