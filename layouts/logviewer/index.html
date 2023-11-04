@@ -1,0 +1,175 @@
+{{ define "main" }}
+  <main class="landing">
+    <section class="hero maxw">
+      <div class="hero-copy">
+        <h1>The streaming companion for power users</h1>
+        <p>
+          strimertül is a free and open source tool to add to your Twitch
+          streams for creating powerful overlays and power-up the viewer
+          interaction!
+        </p>
+        <div id="download">
+          <noscript>
+            <a href="https://github.com/strimertul/strimertul/releases/latest">
+              Check out the latest version on GitHub
+            </a>
+          </noscript>
+          <div class="hidden" id="download-template">
+            <h2>
+              Latest stable release:
+              <a href="https://github.com/strimertul/strimertul/releases/latest"
+                ><span data-field="name"></span> (<time data-field="date"></time
+                >)</a
+              >
+            </h2>
+            <div class="download-list"><b>Downloads:</b></div>
+          </div>
+        </div>
+        <script>
+          const platforms = [
+            {
+              filter: ".exe",
+              name: "Windows 64-bit",
+            },
+            {
+              filter: ".dmg",
+              name: "macOS Universal",
+            },
+            {
+              filter: "linux",
+              name: "Linux AMD64",
+            },
+          ];
+          (async function () {
+            const releaseblock = document.getElementById("download-template");
+            const latest = await (
+              await fetch(
+                "https://api.github.com/repos/strimertul/strimertul/releases/latest"
+              )
+            ).json();
+            // Poor's man angularjs
+            const data = {
+              ...latest,
+              date: new Date(latest.published_at).toLocaleDateString(),
+            };
+            releaseblock.querySelectorAll("*[data-field]").forEach((el) => {
+              const { field } = el.dataset;
+              if (field in data) {
+                el.innerHTML = data[field];
+              }
+            });
+            // Make those links
+            const downloadLinks = releaseblock.querySelector(".download-list");
+            latest.assets
+              .map((asset) => [
+                platforms.findIndex(({ filter }) =>
+                  asset.name.includes(filter)
+                ),
+                asset.browser_download_url,
+              ])
+              .filter(([index]) => index >= 0)
+              .sort(([a], [b]) => a - b)
+              .forEach(([index, url]) => {
+                const link = document.createElement("a");
+                link.classList.add("download-link");
+                link.href = url;
+                link.appendChild(
+                  document.createTextNode(platforms[index].name)
+                );
+                downloadLinks.appendChild(link);
+              });
+            releaseblock.classList.remove("hidden");
+          })();
+        </script>
+      </div>
+    </section>
+    <section class="features">
+      <article>
+        <div class="maxw">
+          <div class="flex">
+            <div>
+              <header>One API for everything</header>
+              <p>
+                Build overlays and tooling with easy access to Twitch alerts,
+                chat messages and more through a single websocket interface. The
+                API strives for simplicity with a
+                <a
+                  href="https://github.com/strimertul/kilovolt/blob/main/PROTOCOL.md"
+                  >documented protocol</a
+                >, but there are also officially supported bindings for popular
+                languages such as
+                <a href="https://github.com/strimertul/kilovolt-client-ts"
+                  >Typescript</a
+                >,
+                <a href="https://github.com/strimertul/kilovolt-client-go"
+                  >Go</a
+                >
+                and
+                <a href="https://github.com/strimertul/kilovolt-client-python"
+                  >Python</a
+                >.
+              </p>
+            </div>
+            {{ $image := resources.Get "landing/websocket.svg" }}
+            <img
+              class="landing-point"
+              src="{{ $image.RelPermalink }}"
+              style="width: 200px; padding-left: 20px"
+            />
+          </div>
+        </div>
+      </article>
+      <article>
+        <div class="maxw">
+          <div class="flex">
+            {{ $image := resources.Get "landing/rewards.png" }}
+            <img class="landing-point" src="{{ $image.RelPermalink }}" />
+            <div>
+              <header>No Twitch Affiliate?</header>
+              <p>
+                The built-in loyalty system lets regular viewers accrue points,
+                claim rewards and contribute towards community goals.
+              </p>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article>
+        <div class="maxw">
+          <div class="flex">
+            <div class="flex-copy">
+              <header>Keep total control of your tech</header>
+              <p>
+                Strimertül runs completely in your computer and has no remote
+                components.
+              </p>
+            </div>
+            {{ $image := resources.Get "landing/downloads.png" }}
+            <img class="landing-point" src="{{ $image.RelPermalink }}" />
+          </div>
+        </div>
+      </article>
+      <article>
+        <div class="maxw">
+          <div class="flex">
+            {{ $image := resources.Get "landing/AGPLv3_Logo.svg" }}
+            <img class="landing-point" src="{{ $image.RelPermalink }}" />
+            <div>
+              <header>Free and won't turn evil</header>
+              <p>
+                strimertül is free and open source under the
+                <a
+                  href="https://github.com/strimertul/strimertul/blob/master/LICENSE"
+                  >AGPLv3</a
+                >, a strong
+                <a href="https://en.wikipedia.org/wiki/Copyleft"
+                  >copyleft license</a
+                >, meaning we couldn't close it down even if we wanted!
+              </p>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+{{ end }}
