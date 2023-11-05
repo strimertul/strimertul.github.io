@@ -73,8 +73,37 @@
       const startingEl = document.getElementById("starting");
       const tableEl = document.getElementById("logs");
 
+      if (!mainEl || !startingEl || !tableEl) {
+        throw new Error("Missing elements");
+      }
+
+      /**
+       * Reads a log file and populates a table with the parsed logs.
+       *
+       * @param {File} file - The log file to be read.
+       * @return {void}
+       */
+      function readLogFile(file) {
+        const reader = new FileReader();
+        reader.addEventListener("load", (ev) => {
+          const logs =
+            ev.target?.result
+              ?.toString()
+              .split("\n")
+              .map((line) => line.trim())
+              .filter((line) => line.length > 0)
+              .map((line) => {
+                return makeLog(JSON.parse(line));
+              }) || [];
+          tableEl?.querySelector("tbody")?.replaceChildren(...logs);
+          tableEl?.classList.remove("hidden");
+          startingEl?.classList.add("hidden");
+        });
+        reader.readAsText(file);
+      }
+
       // Click handler (open file select)
-      startingEl?.addEventListener("click", (ev) => {
+      startingEl.addEventListener("click", (ev) => {
         // Create temporary file input and click it
         const fileSelect = document.createElement("input");
         fileSelect.type = "file";
@@ -84,42 +113,72 @@
             const file = ev.target.files[0];
             startingEl.innerHTML = "Loading...";
             if (file) {
-              const reader = new FileReader();
-              reader.addEventListener("load", (ev) => {
-                const logs =
-                  ev.target?.result
-                    ?.toString()
-                    .split("\n")
-                    .map((line) => line.trim())
-                    .filter((line) => line.length > 0)
-                    .map((line) => {
-                      return makeLog(JSON.parse(line));
-                    }) || [];
-                tableEl?.querySelector("tbody")?.replaceChildren(...logs);
-                tableEl?.classList.remove("hidden");
-                startingEl.classList.add("hidden");
-              });
-              reader.readAsText(file);
+              readLogFile(file);
             }
           }
         });
         fileSelect.click();
       });
 
+      // Drag and drop handler
+      mainEl.addEventListener("dragover", (ev) => {
+        ev.preventDefault();
+      });
+      mainEl.addEventListener("drop", (ev) => {
+        ev.preventDefault();
+        if (ev.dataTransfer?.files) {
+          const file = ev.dataTransfer.files[0];
+          startingEl.innerHTML = "Loading...";
+          if (file) {
+            readLogFile(file);
+          }
+        }
+      });
+
+      /**
+       * Creates a log entry as a table row element.
+       *
+       * @param log - An object representing a log entry with properties level, ts, caller, msg, and data.
+       *
+       * @returns A table row element representing the log entry.
+       */
       function makeLog(log) {
         const tr = document.createElement("tr");
         const { level, ts, caller, msg, ...data } = log;
         tr.appendChild(makeCell(level));
-        tr.appendChild(makeCell(new Date(ts * 1000).toISOString()));
+        tr.appendChild(makeCell(makeDateElement(new Date(ts * 1000))));
         tr.appendChild(makeCell(caller));
         tr.appendChild(makeCell(msg));
         tr.appendChild(makeCell(JSON.stringify(data)));
         return tr;
       }
 
-      function makeCell(text) {
+      /**
+       * Creates a new date element with the given date.
+       *
+       * @param {Date} date - The date to be used for the new date element.
+       * @returns {HTMLTimeElement} The newly created date element.
+       */
+      function makeDateElement(date) {
+        const time = document.createElement("time");
+        time.setAttribute("datetime", date.toISOString());
+        time.appendChild(document.createTextNode(date.toLocaleTimeString()));
+        return time;
+      }
+
+      /**
+       * Creates a table cell element with the given text as its content.
+       *
+       * @param {string | HTMLElement} el - A string or a DOM element to be used as the content of the cell.
+       * @returns {HTMLTableCellElement} - A table cell element with the given text as its content.
+       */
+      function makeCell(el) {
         const td = document.createElement("td");
-        td.appendChild(document.createTextNode(text));
+        if (typeof el === "string") {
+          td.appendChild(document.createTextNode(el));
+        } else {
+          td.appendChild(el);
+        }
         return td;
       }
     </script>
