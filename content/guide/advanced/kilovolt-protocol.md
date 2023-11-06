@@ -36,13 +36,13 @@ The interactive authentication flow allows your app to connect without having to
 
 The data attributes you can specify to add metadata are the following:
 
-| Property           | Description                                                 | Example                                                                            |
-| ------------------ | ----------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `icon`             | URL to the app's icon, shown at 64x64                       | <https://raw.githubusercontent.com/strimertul/strimertul/master/build/appicon.png> |
-| `name`             | Name of the application                                     | My custom app                                                                      |
-| `author`           | Who made the application, shown below name                  | CustomAppSoft                                                                      |
-| `url`              | URL to the app's website/source/info                        | https://strimertul.stream                                                          |
-| `verificationCode` | A code to display on both app and UI to verify authenticity | 1234ABC                                                                            |
+| Property           | Description                                                 | Example                    |
+| ------------------ | ----------------------------------------------------------- | -------------------------- |
+| `icon`             | URL to the app's icon, shown at 64x64                       | https://url/to/appicon.png |
+| `name`             | Name of the application                                     | My custom app              |
+| `author`           | Who made the application, shown below name                  | CustomAppSoft              |
+| `url`              | URL to the app's website/source/info                        | https://strimertul.stream  |
+| `verificationCode` | A code to display on both app and UI to verify authenticity | 1234ABC                    |
 
 Every attribute is optional but you should at least fill out the name to avoid showing up as "Unknown application". Omitted fields will generally not show up in the dialog.
 
