@@ -22,6 +22,12 @@ If you're not using the default webserver bind, replace `localhost:4337` with wh
 
 You can authenticate in two ways, either using the challenge flow or the interactive flow. The challenge flow requires knowing the password to the kilovolt store (a shared secret key) while the interactive flow doesn't but it requires the user aknowledging and allowing the connection using a dialog in the UI.
 
+You can also disable authentication altogether by putting an empty password. In that case, you don't need to authenticate at all when you connect. However it's very discouraged to do that.
+
+### Why have authentication
+
+The main reason for using websockets as the base protocol is to allow webpages to talk to strimertül, especially the web views in OBS (which most use for overlays). The problem with a fully accessible web server is that rogue webpages could potentially connect to your strimertül instance and leak important info like your Twitch tokens or just mess around and ruin your setup.
+
 ### Challenge-based authentication
 
 The challenge-based authentication flow allows your app to connect to strimertül in a non-interactive way. This is great for helper apps or web overlays.
