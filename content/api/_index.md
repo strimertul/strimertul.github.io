@@ -12,4 +12,4 @@ The strimertül's API is a [Kilovolt](https://github.com/strimertul/kilovolt) se
 
 ## Available keys/RPC/events
 
-To check what keys you can access on strimertül, click on the menu entry with your strimertül version (or the closest one to it).
+To check what keys you can access on strimertül, click on the menu entry with your strimertül version (or the closest one to it). Most keys will be stored as JSON objects, so use the reference as a schema for those objects. Modifying the schema might make strimertül not work correctly (or at all).
